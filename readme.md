@@ -63,6 +63,7 @@ streamlit run app.py
 
 Once launched, open your browser at http://localhost:8501
 
+Link to the video : https://www.youtube.com/watch?v=FqpQB3f18X8
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 👤 Author
 
