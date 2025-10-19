@@ -162,6 +162,12 @@ def render(df_filtered: pd.DataFrame):
     ### 🌍 Dataset Scope and Limitations
 
     Tree naming may still contain inconsistencies, since the original dataset was in French and I translated species names into English to keep the project consistent.  
+    For example, *Prunus avium* corresponds to **Sweet Cherry** in English and **Merisier** in French.  
+    However, in the dataset, the same species might appear under a different French label —  
+    for instance, **Cerisier à fleurs**, which would then be literally translated as **Flowering Cherry**.  
+    This means we could end up with **two different names for the same species**, which is not scientifically rigorous.  
+    Using the **scientific name (genus + species)** is therefore the most reliable way to ensure consistency across languages and datasets.  
+                
 
     The initial dataset contained **214,837 trees**, but some of them were **outside of Paris** — for example, in the *Parc de Sceaux* or surrounding suburbs.  
     After filtering for trees within the city limits, only **150,570 trees** remained.

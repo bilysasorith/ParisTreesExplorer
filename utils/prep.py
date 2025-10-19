@@ -824,5 +824,13 @@ def clean_trees(df: pd.DataFrame) -> pd.DataFrame:
             if "en_name" in df.columns and "en_name" in names:
                 df.loc[m & _blank(df["en_name"]), "en_name"] = names["en_name"]
 
+    
     return df
 
+def pick_common_name_col(df):
+    """Return the common-name column to use, preferring English then French; None if absent."""
+    if "en_name" in df.columns:
+        return "en_name"
+    if "french_name" in df.columns:
+        return "french_name"
+    return None

@@ -1,6 +1,7 @@
 # sections/overview.py
 import streamlit as st
 import pandas as pd
+from utils.prep import pick_common_name_col  # si tu l'as mis dans prep.py
 
 
 def render(df_filtered: pd.DataFrame):
@@ -19,8 +20,18 @@ def render(df_filtered: pd.DataFrame):
     c1.metric("🌳 Total Trees", format(len(df_f), ",d").replace(",", " "))
 
     # 🌿 Unique species count (choose french_name or en_name if exists)
-    species_col = "french_name" if "french_name" in df_f.columns else "en_name"
-    c2.metric("🌿 Species Diversity", df_f[species_col].nunique())
+    species_col = pick_common_name_col(df_f)
+    if species_col is None:
+        c2.metric("🌿 Species Diversity", "N/A")
+    else:
+        n_species = (
+            df_f[species_col]
+            .astype(str).str.strip()
+            .replace({"": pd.NA})
+            .dropna()
+            .nunique()
+        )
+        c2.metric("🌿 Species Diversity", n_species)
 
     # 🌟 Percentage of remarkable trees
     if "is_remarkable" in df_f.columns:
